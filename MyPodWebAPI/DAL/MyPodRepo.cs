@@ -1,0 +1,123 @@
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using MyPodWebAPI.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
+
+namespace MyPodWebAPI.DAL
+{
+    public class MyPodRepo : IDisposable
+    {
+        private MyPodContext Context;
+
+        private UserManager<CustomUser> _userManager;
+
+        public MyPodRepo(MyPodContext _ctx)
+        {
+            Context = _ctx;
+            _userManager = new UserManager<CustomUser>(new UserStore<CustomUser>(_ctx));
+        }
+        public MyPodRepo()
+        {
+            Context = new MyPodContext();
+            _userManager = new UserManager<CustomUser>(new UserStore<CustomUser>(Context));
+        }
+
+        public async Task<IdentityResult> RegisterUser(UserModel userModel)
+        {
+            CustomUser user = new CustomUser
+            {
+                UserName = userModel.UserName
+            };
+
+            var result = await _userManager.CreateAsync(user, userModel.Password);
+
+            return result;
+        }
+
+        public void Dispose()
+        {
+            Context.Dispose();
+            _userManager.Dispose();
+        }
+
+        public async Task<CustomUser> FindUser(string userName, string password)
+        {
+            CustomUser user = await _userManager.FindAsync(userName, password);
+
+            return user;
+        }
+
+        public object GetPodcasts()
+        {
+            return Context.Users.Select(u => u.Id);
+        }
+
+        public void AddPodcast(Podcast new_podcast)
+        {
+            Context.Podcasts.Add(new_podcast);
+            Context.SaveChanges();
+        }
+
+        public bool AddPodcastChannelToUser(string userId, string podcastId)
+        {
+            Podcast found_podcast = Context.Podcasts.FirstOrDefault(p => p.Title == podcastId);
+            CustomUser found_user = Context.Users.FirstOrDefault(u => u.Id == userId);
+            if (found_podcast != null && found_user != null)
+            {
+                found_user.Subscriptions.Add(found_podcast);
+                Context.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public List<Podcast> ShowUsersPodcasts(string userId)
+        {
+            CustomUser user = Context.Users.SingleOrDefault(p => p.Id == userId);
+            if (user.Subscriptions.Count > 0)
+            {
+                return user.Subscriptions;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public void AddBlogPost(string user, Blog post)
+        {
+            Context.Users.SingleOrDefault(u => u.UserName == user).Posts.Add(post);
+            Context.SaveChanges();
+        }
+
+        public Blog RemoveBlogPost(int blogPost_id)
+        {
+            Blog found_post = Context.Posts.FirstOrDefault(p => p.PostId == blogPost_id);
+            if (found_post != null)
+            {
+                Context.Posts.Remove(found_post);
+                Context.SaveChanges();
+            }
+            return found_post;
+        }
+
+        public List<Blog> GetBlogPosts()
+        {
+            int i = 0;
+            return Context.Posts.ToList();
+        }
+
+        public CustomUser GetAppUser(string user_id)
+        {
+            return Context.Users.SingleOrDefault(u => u.Id == user_id);
+        }
+
+    }
+}

@@ -1,0 +1,10 @@
+﻿<section class="container-fluid" ng-controller="searchController as ctrl">
+    <div class="panel panel-default episodes" ng-model="getPodcastFeed">
+        <p>{{episode.title}}</p>
+        <audio controls>
+            <source src="{{episode.url}}" type="audio/ogg" />
+            <source src="{{episode.url}}" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+</section>

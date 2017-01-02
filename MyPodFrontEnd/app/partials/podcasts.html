@@ -1,0 +1,33 @@
+﻿<section class="container-fluid" ng-controller="searchController as ctrl">
+    <h1 class="lead">show others what you listen to by subscribing to podcasts.</h1>
+    <div class="panel panel-default podcasts col-sm-6" ng-hide="ctrl.subscriptions.length == 0">
+        <h2>yourpods.</h2>
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="result in ctrl.subscriptions">
+                <div class="media-left media-middle">
+                    <a href="#">
+                        <img class="media-object" src="{{result.artworkUrl60}}" alt="Yay podcasts!">
+                    </a>
+                </div>
+                <strong>{{result.collectionName}}</strong>
+                <h4>{{result.author}}</h4>
+                <a ng-click="ctrl.unfollowPodcast()" class="btn btn-default">UnFollow</a>
+                <a ng-click="ctrl.getPodcastFeed(result.feedUrl)" class="btn btn-default">Episodes</a>
+
+            </li>
+        </ul>
+    </div><br />
+
+    <div class="col-sm-6" ng-hide="ctrl.subscriptions.length == 0">
+        <h2>episodes.</h2>
+        <div class="panel panel-default episodes" ng-model="getPodcastFeed">
+            <ol class="list-group">
+                <li class="list-group-item" ng-repeat="episode in ctrl.episodes">
+                    <p>{{episode.title}}</p>
+                    <audio controls> <source src="{{episode.url}}" type="audio/mpeg"></audio>
+                </li>
+            </ol>
+        </div>
+
+    </div>
+</section>

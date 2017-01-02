@@ -1,0 +1,18 @@
+﻿<div class="container">
+
+    <div class="col-md-6 push-md-3">
+        <h1 class="form-login-heading">Register</h1>
+        <form class="form-login" role="form">
+
+            <input type="text" class="form-control" placeholder="Username" data-ng-model="registration.userName" required autofocus>
+            <input type="password" class="form-control" placeholder="Password" data-ng-model="registration.password" required>
+            <input type="password" class="form-control" placeholder="Confirm Password" data-ng-model="registration.confirmPassword" required>
+            <div class="text-xs-center">
+                <button class="btn btn-lg btn-primary" type="submit" data-ng-click="signUp()">Submit</button>
+            </div>
+            <div class="message--login text-xs-center" data-ng-hide="message == ''" data-ng-class="(savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
+                {{message}}
+            </div>
+        </form>
+    </div>
+</div>

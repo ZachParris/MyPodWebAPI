@@ -1,0 +1,20 @@
+﻿<div class="container">
+
+    <div class="col-md-6 push-md-3">
+        <h1 class="form-login-heading">Login</h1>
+
+        <form class="form-login" role="form">
+            <input type="text" class="form-control" placeholder="Username" data-ng-model="loginData.userName" required autofocus>
+            <input type="password" class="form-control" placeholder="Password" data-ng-model="loginData.password" required>
+
+            <div class="text-xs-center">
+                <button class="btn btn-lg btn-primary" type="submit" data-ng-click="login()">Login</button>
+            </div>
+
+            <div data-ng-hide="message == ''" class="alert alert-danger message--login text-xs-center">
+                {{message}}
+            </div>
+
+        </form>
+    </div>
+</div>
