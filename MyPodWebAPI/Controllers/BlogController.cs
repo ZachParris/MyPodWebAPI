@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Web.Http;
 using static MyPodWebAPI.Models.MyPodViewModel;
 
@@ -13,37 +14,68 @@ namespace MyPodWebAPI.Controllers
 {
     public class BlogController : ApiController
     {
+        private MyPodRepo repo = null;
+
+        public BlogController()
+        {
+            repo = new MyPodRepo();
+        }
+
         [HttpGet]
+        [Authorize]
         [Route("api/blog")]
         // GET api/<controller>
-        public IEnumerable<string> Get()
+        public IEnumerable<Blog> Get()
         {
-            return new string[] { "value1", "value2" };
+            return repo.GetBlogPosts(GetCurrentUser());
         }
 
         // GET api/<controller>/5
-        public string Get(int id)
+        public Blog Get(int id)
         {
-            return "value";
+            if(repo.GetBlogPosts(GetCurrentUser()).Any(p => p.PostId == id))
+            {
+                return repo.GetBlogById(id);
+            }
+            return null;
         }
 
-        [HttpGet]
+        private string GetCurrentUser()
+        {
+            ClaimsPrincipal principal = Request.GetRequestContext().Principal as ClaimsPrincipal;
+            var userName = principal.Claims.Where(c => c.Type == "sub").Single().Value;
+            return userName;
+        }
+
+        [HttpPost]
+        [Authorize]
         [Route("api/blog")]
         // POST api/<controller>
         public Dictionary<string, bool> Post([FromBody]BlogViewModel value)
         {
-            MyPodRepo repo = new MyPodRepo();
             Dictionary<string, bool> post = new Dictionary<string, bool>();
+
             if (ModelState.IsValid)
             {
-                Blog new_post = new Blog
+                string username = GetCurrentUser();
+
+                if (username != null)
                 {
-                    Post = value.BlogPost
-                };
-                var userId = User.Identity.GetUserId();
-                repo.AddBlogPost(new_post);
-                post.Add("successful", true);
+                    Blog new_post = new Blog
+                    {
+                        Post = value.BlogPost
+                    };
+                    repo.AddBlogPost(username, new_post);
+                    post.Add("successful", true);
+                }else
+                {
+                    post.Add("successful", false);
+                }
+            }else
+            {
+                post.Add("successful", false);
             }
+            return post;
         }
 
         // PUT api/<controller>/5

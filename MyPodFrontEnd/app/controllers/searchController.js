@@ -36,6 +36,13 @@ app.controller("searchController", function (searchService) {
         })
     }
 
+    vm.nowPlaying = function (url) {
+        searchService.searchResult(url).then(function (response) {
+            getPodcastFeed();
+            chosenEpisode = response.data
+        })
+    }
+
     vm.followPodcastChannel = function (url) {
         searchService.subscription = function (userChoice) {
             vm.subscriptions = userChoice.response.data;

@@ -2,7 +2,7 @@
 
 app.config(function ($routeProvider, $locationProvider) {
 
-    $routeProvider.when("/home", {
+    $routeProvider.when("/", {
         controller: "indexController",
         templateUrl: "app/partials/home.html"
     }).when("/login", {
@@ -20,9 +20,13 @@ app.config(function ($routeProvider, $locationProvider) {
     }).when("/podcasts", {
         controller: "searchController",
         templateUrl: "app/partials/podcasts.html"
-    }).otherwise({ redirectTo: "/home" });
+    }).otherwise({ redirectTo: "/" });
 
     $locationProvider.html5Mode(true);
+});
+
+app.config(function ($httpProvider) {
+    $httpProvider.interceptors.push('authInterceptorService');
 });
 
 app.run(['authService', function (authService) {

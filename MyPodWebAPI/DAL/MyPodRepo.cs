@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Http;
 
 namespace MyPodWebAPI.DAL
 {
@@ -36,6 +37,16 @@ namespace MyPodWebAPI.DAL
             var result = await _userManager.CreateAsync(user, userModel.Password);
 
             return result;
+        }
+
+        public List<Blog> GetAllPostsForUser(string user)
+        {
+            return Context.Posts.Where(p => p.BlogAuthor.UserName == user).ToList();
+        }
+
+        public Blog GetBlogById(int id)
+        {
+            return Context.Posts.SingleOrDefault(p => p.PostId == id);
         }
 
         public void Dispose()
@@ -91,12 +102,14 @@ namespace MyPodWebAPI.DAL
             }
         }
 
+        [Authorize]
         public void AddBlogPost(string user, Blog post)
         {
             Context.Users.SingleOrDefault(u => u.UserName == user).Posts.Add(post);
             Context.SaveChanges();
         }
 
+        [Authorize]
         public Blog RemoveBlogPost(int blogPost_id)
         {
             Blog found_post = Context.Posts.FirstOrDefault(p => p.PostId == blogPost_id);
@@ -108,10 +121,9 @@ namespace MyPodWebAPI.DAL
             return found_post;
         }
 
-        public List<Blog> GetBlogPosts()
+        public List<Blog> GetBlogPosts(string username)
         {
-            int i = 0;
-            return Context.Posts.ToList();
+            return Context.Posts.Where(p => p.BlogAuthor.UserName == username).ToList();
         }
 
         public CustomUser GetAppUser(string user_id)

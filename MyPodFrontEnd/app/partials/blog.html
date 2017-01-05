@@ -14,11 +14,8 @@
         <div class="panel panel-default">
             <ol class="list-group">
                 <li class="list-group-item" ng-repeat="blog in blog.blogPosts">
-                    <p>
-                        {{blog.Post}}
-                    </p>
-                    <button type="button" class="btn btn-default form-control" ng-click="blog.removePost()">Remove</button>
-
+                    <p>{{blog}}</p>
+                    <a ng-click="blog.removePost()" class="btn btn-default">Remove</a>
                 </li>
             </ol>
         </div>
