@@ -143,11 +143,16 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="DAL\MyPodContext.cs" />
     <Compile Include="DAL\MyPodRepo.cs" />
     <Compile Include="Migrations\201612310018070_InitialCreate.cs" />
     <Compile Include="Migrations\201612310018070_InitialCreate.Designer.cs">
       <DependentUpon>201612310018070_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701060018405_ChuckPls.cs" />
+    <Compile Include="Migrations\201701060018405_ChuckPls.Designer.cs">
+      <DependentUpon>201701060018405_ChuckPls.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Blog.cs" />
@@ -175,6 +180,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201612310018070_InitialCreate.resx">
       <DependentUpon>201612310018070_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701060018405_ChuckPls.resx">
+      <DependentUpon>201701060018405_ChuckPls.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

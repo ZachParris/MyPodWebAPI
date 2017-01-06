@@ -21,11 +21,9 @@ namespace MyPodWebAPI.Controllers
             repo = new MyPodRepo();
         }
 
-        [HttpGet]
         [Authorize]
-        [Route("api/blog")]
         // GET api/<controller>
-        public IEnumerable<Blog> Get()
+        public List<Blog> Get()
         {
             return repo.GetBlogPosts(GetCurrentUser());
         }
@@ -47,16 +45,13 @@ namespace MyPodWebAPI.Controllers
             return userName;
         }
 
-        [HttpPost]
         [Authorize]
-        [Route("api/blog")]
         // POST api/<controller>
         public Dictionary<string, bool> Post([FromBody]BlogViewModel value)
         {
             Dictionary<string, bool> post = new Dictionary<string, bool>();
 
-            if (ModelState.IsValid)
-            {
+            
                 string username = GetCurrentUser();
 
                 if (username != null)
@@ -71,10 +66,7 @@ namespace MyPodWebAPI.Controllers
                 {
                     post.Add("successful", false);
                 }
-            }else
-            {
-                post.Add("successful", false);
-            }
+           
             return post;
         }
 

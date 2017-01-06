@@ -11,6 +11,6 @@ namespace MyPodWebAPI.Models
         [Key]
         public int PostId { get; set; }
         public string Post { get; set; }
-        public virtual CustomUser BlogAuthor { get; set; }
+        public CustomUser BlogAuthor { get; set; }
     }
 }

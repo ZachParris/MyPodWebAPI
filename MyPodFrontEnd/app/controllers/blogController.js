@@ -1,26 +1,27 @@
 ﻿"use strict";
 
-app.controller("blogController", function (authService, blogService) {
-    var vm = this;
-    vm.blogPosts = [];
-    vm.blogInput;
+app.controller("blogController", ['$scope', '$location', 'authService', 'blogService', function ($scope, $location, authService, blogService) {
+   
+    $scope.blogPosts = [];
+    $scope.newPost = {};
 
-    vm.addNewPost = function () {
-        blogService.addPost(vm.blogInput).then(function () {
-            vm.getAllBlogPosts();
+    $scope.addNewPost = function (input) {
+        console.log(input);
+        blogService.addPost(input).then(function () {
+            $location.path("/blog");
         })
     }
 
-    vm.getAllBlogPosts = function () {
+    $scope.getAllBlogPosts = function () {
         blogService.getAllPosts().then(function (response) {
-            vm.blogPosts = response.data;
+            $scope.blogPosts = response.data;
             console.log(response.data);
         });
     };
 
-    vm.removePost = function () {
+    $scope.removePost = function () {
         blogService.removeBlogPost().then(function (post) {
-            vm.blogPosts.remove(post)
+            $scope.blogPosts.remove(post)
         })
     }
-});
+}]);

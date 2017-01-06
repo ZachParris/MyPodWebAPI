@@ -44,9 +44,9 @@ app.controller("searchController", function (searchService) {
     }
 
     vm.followPodcastChannel = function (url) {
-        searchService.subscription = function (userChoice) {
-            vm.subscriptions = userChoice.response.data;
-        }
+        searchService.addSubscription(url).then(function () {
+            $location.path("/podcasts");
+        })
     }
 
     vm.unfollowPodcast = function (url) {

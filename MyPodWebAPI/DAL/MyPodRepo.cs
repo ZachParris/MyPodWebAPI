@@ -102,14 +102,12 @@ namespace MyPodWebAPI.DAL
             }
         }
 
-        [Authorize]
         public void AddBlogPost(string user, Blog post)
         {
             Context.Users.SingleOrDefault(u => u.UserName == user).Posts.Add(post);
             Context.SaveChanges();
         }
 
-        [Authorize]
         public Blog RemoveBlogPost(int blogPost_id)
         {
             Blog found_post = Context.Posts.FirstOrDefault(p => p.PostId == blogPost_id);
@@ -123,7 +121,8 @@ namespace MyPodWebAPI.DAL
 
         public List<Blog> GetBlogPosts(string username)
         {
-            return Context.Posts.Where(p => p.BlogAuthor.UserName == username).ToList();
+            CustomUser user = Context.Users.SingleOrDefault(u => u.UserName == username);
+            return user.Posts;
         }
 
         public CustomUser GetAppUser(string user_id)

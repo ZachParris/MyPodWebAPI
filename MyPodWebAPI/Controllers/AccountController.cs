@@ -14,11 +14,11 @@ namespace MyPodWebAPI.Controllers
     [RoutePrefix("api/Account")]
     public class AccountController : ApiController
     {
-        private MyPodRepo _repo = null;
+        private MyPodRepo repo = null;
 
         public AccountController()
         {
-            _repo = new MyPodRepo();
+            repo = new MyPodRepo();
         }
 
         // POST api/Account/Register
@@ -31,7 +31,7 @@ namespace MyPodWebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            IdentityResult result = await _repo.RegisterUser(userModel);
+            IdentityResult result = await repo.RegisterUser(userModel);
 
             IHttpActionResult errorResult = GetErrorResult(result);
 
@@ -47,7 +47,7 @@ namespace MyPodWebAPI.Controllers
         {
             if (disposing)
             {
-                _repo.Dispose();
+                repo.Dispose();
             }
 
             base.Dispose(disposing);
