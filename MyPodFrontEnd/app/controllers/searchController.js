@@ -1,6 +1,6 @@
 ﻿"use strict";
 
-app.controller("searchController", function (searchService) {
+app.controller("searchController", function (searchService, $location) {
     var vm = this;
     const parser = new DOMParser();
     vm.searchResults = [];
@@ -43,8 +43,8 @@ app.controller("searchController", function (searchService) {
         })
     }
 
-    vm.followPodcastChannel = function (url) {
-        searchService.addSubscription(url).then(function () {
+    vm.followPodcastChannel = function (channel) {
+        searchService.addSubscription(channel).then(function () {
             $location.path("/podcasts");
         })
     }

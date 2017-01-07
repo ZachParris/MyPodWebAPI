@@ -84,10 +84,29 @@ namespace MyPodWebAPI.DAL
             Context.SaveChanges();
         }
 
-        public bool AddPodcastChannelToUserSubscriptions(string userId, string podcastId)
+        public bool AddPodcastChannelToUserSubscriptions(string userId, string podcast)
         {
-            Podcast found_podcast = Context.Podcasts.FirstOrDefault(p => p.Title == podcastId);
+            Podcast found_podcast = Context.Podcasts.FirstOrDefault(p => p.Title == podcast);
             CustomUser found_user = Context.Users.FirstOrDefault(u => u.Id == userId);
+            if (found_podcast != null && found_user != null)
+            {
+                found_user.Subscriptions.Add(found_podcast);
+                Context.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool AddPodcastChannelToUserSubscriptions(string userId, Podcast podcast)
+        {
+
+            Podcast found_podcast = Context.Podcasts.FirstOrDefault(p => p.Title == podcast.Title);
+            //if found podcast = null thn add podcast to DB (context.podcast.add(podcast)) 
+            CustomUser found_user = Context.Users.FirstOrDefault(u => u.Id == userId);
+            
             if (found_podcast != null && found_user != null)
             {
                 found_user.Subscriptions.Add(found_podcast);

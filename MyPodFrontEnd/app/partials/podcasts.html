@@ -3,10 +3,10 @@
     <div class="panel panel-default podcasts col-sm-6" ng-hide="ctrl.subscriptions.length == 0">
         <h2>yourpods.</h2>
         <ul class="list-group">
-            <li class="list-group-item" ng-repeat="result in ctrl.subscriptions">
+            <li class="list-group-item" ng-repeat="result in ctrl.addSubscriptions">
                 <div class="media-left media-middle">
                     <a href="#">
-                        <img class="media-object" src="{{result.artworkUrl60}}" alt="">
+                        <img class="media-object" src="{{result.artworkUrl600}}" alt="">
                     </a>
                 </div>
                 <strong>{{result.collectionName}}</strong>

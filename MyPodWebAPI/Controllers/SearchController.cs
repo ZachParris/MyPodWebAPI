@@ -44,8 +44,14 @@ namespace MyPodWebAPI.Controllers
         }
 
         // POST: api/Search
-        public void Post([FromBody]string value)
+        public void Post([FromBody]dynamic value)
         {
+            Podcast new_podcast = new Podcast();
+            new_podcast.FeedUrl = value.feedUrl;
+            new_podcast.Title = value.title;
+            new_podcast.Author = value.author;
+            new_podcast.ImageUrl = value.artWork1600;
+            repo.AddPodcastChannelToUserSubscriptions(GetCurrentUser(), new_podcast);
         }
 
         // PUT: api/Search/5

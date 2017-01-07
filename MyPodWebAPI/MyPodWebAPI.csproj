@@ -150,6 +150,10 @@
     <Compile Include="Migrations\201701070304478_initialCreate.Designer.cs">
       <DependentUpon>201701070304478_initialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701071722095_ImageUrl.cs" />
+    <Compile Include="Migrations\201701071722095_ImageUrl.Designer.cs">
+      <DependentUpon>201701071722095_ImageUrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Blog.cs" />
     <Compile Include="Models\CustomUser.cs" />
@@ -176,6 +180,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201701070304478_initialCreate.resx">
       <DependentUpon>201701070304478_initialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701071722095_ImageUrl.resx">
+      <DependentUpon>201701071722095_ImageUrl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
