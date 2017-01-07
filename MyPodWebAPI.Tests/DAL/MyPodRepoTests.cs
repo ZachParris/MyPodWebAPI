@@ -2,8 +2,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Data.Entity;
 using Moq;
-using MyPod.Models;
-using MyPod.DAL;
+using MyPodWebAPI.Models;
+using MyPodWebAPI.DAL;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNet.Identity;
@@ -15,32 +15,32 @@ namespace MyPod.Tests.DAL
     {
         private Mock<DbSet<Podcast>> mock_podcasts;
         private Mock<DbSet<Episode>> mock_episodes;
-        private Mock<DbSet<Message>> mock_messages;
+        private Mock<DbSet<Blog>> mock_Blogs;
 
-        private Mock<DbSet<ApplicationUser>> mock_users { get; set; }
+        private Mock<DbSet<CustomUser>> mock_users { get; set; }
         private Mock<MyPodContext> mock_context { get; set; }
-        private MyPodRepository Repo { get; set; }
-        private List<ApplicationUser> users { get; set; }
+        private MyPodRepo Repo { get; set; }
+        private List<CustomUser> users { get; set; }
         private List<Podcast> podcasts { get; set; }
-        public List<Message> messages { get; private set; }
+        public List<Blog> Blogs { get; private set; }
         public List<Episode> episodes { get; private set; }
 
         [TestInitialize]
         public void Initialize()
         {
             mock_context = new Mock<MyPodContext>();
-            mock_users = new Mock<DbSet<ApplicationUser>>();
+            mock_users = new Mock<DbSet<CustomUser>>();
             mock_podcasts = new Mock<DbSet<Podcast>>();
             mock_episodes = new Mock<DbSet<Episode>>();
-            mock_messages = new Mock<DbSet<Message>>();
-            Repo = new MyPodRepository(mock_context.Object);
+            mock_Blogs = new Mock<DbSet<Blog>>();
+            Repo = new MyPodRepo(mock_context.Object);
 
-            messages = new List<Message>();
+            Blogs = new List<Blog>();
             episodes = new List<Episode>();
             podcasts = new List<Podcast>();
-            ApplicationUser paulyD = new ApplicationUser { Email = "paulyD@example.com", Id = "1234567" };
-            ApplicationUser mikeD = new ApplicationUser { Email = "mikeyD@example.com", Id = "1234569" };
-            users = new List<ApplicationUser>()
+            CustomUser paulyD = new CustomUser { Email = "paulyD@example.com", Id = "1234567" };
+            CustomUser mikeD = new CustomUser { Email = "mikeyD@example.com", Id = "1234569" };
+            users = new List<CustomUser>()
             {
                 paulyD,
                 mikeD
@@ -52,15 +52,15 @@ namespace MyPod.Tests.DAL
             var query_users = users.AsQueryable();
             var query_podcasts = podcasts.AsQueryable();
             var query_episodes = episodes.AsQueryable();
-            var query_messages = messages.AsQueryable();
+            var query_Blogs = Blogs.AsQueryable();
 
-            mock_users.As<IQueryable<ApplicationUser>>().Setup(m => m.Provider).Returns(query_users.Provider);
-            mock_users.As<IQueryable<ApplicationUser>>().Setup(m => m.Expression).Returns(query_users.Expression);
-            mock_users.As<IQueryable<ApplicationUser>>().Setup(m => m.ElementType).Returns(query_users.ElementType);
-            mock_users.As<IQueryable<ApplicationUser>>().Setup(m => m.GetEnumerator()).Returns(() => query_users.GetEnumerator());
+            mock_users.As<IQueryable<CustomUser>>().Setup(m => m.Provider).Returns(query_users.Provider);
+            mock_users.As<IQueryable<CustomUser>>().Setup(m => m.Expression).Returns(query_users.Expression);
+            mock_users.As<IQueryable<CustomUser>>().Setup(m => m.ElementType).Returns(query_users.ElementType);
+            mock_users.As<IQueryable<CustomUser>>().Setup(m => m.GetEnumerator()).Returns(() => query_users.GetEnumerator());
 
             mock_context.Setup(c => c.Users).Returns(mock_users.Object);
-            mock_users.Setup(u => u.Add(It.IsAny<ApplicationUser>())).Callback((ApplicationUser t) => users.Add(t));
+            mock_users.Setup(u => u.Add(It.IsAny<CustomUser>())).Callback((CustomUser t) => users.Add(t));
 
             mock_podcasts.As<IQueryable<Podcast>>().Setup(m => m.Provider).Returns(query_podcasts.Provider);
             mock_podcasts.As<IQueryable<Podcast>>().Setup(m => m.Expression).Returns(query_podcasts.Expression);
@@ -78,19 +78,19 @@ namespace MyPod.Tests.DAL
             mock_context.Setup(c => c.Episodes).Returns(mock_episodes.Object);
             mock_episodes.Setup(u => u.Add(It.IsAny<Episode>())).Callback((Episode t) => episodes.Add(t));
 
-            mock_messages.As<IQueryable<Message>>().Setup(m => m.Provider).Returns(query_messages.Provider);
-            mock_messages.As<IQueryable<Message>>().Setup(m => m.Expression).Returns(query_messages.Expression);
-            mock_messages.As<IQueryable<Message>>().Setup(m => m.ElementType).Returns(query_messages.ElementType);
-            mock_messages.As<IQueryable<Message>>().Setup(m => m.GetEnumerator()).Returns(() => query_messages.GetEnumerator());
+            mock_Blogs.As<IQueryable<Blog>>().Setup(m => m.Provider).Returns(query_Blogs.Provider);
+            mock_Blogs.As<IQueryable<Blog>>().Setup(m => m.Expression).Returns(query_Blogs.Expression);
+            mock_Blogs.As<IQueryable<Blog>>().Setup(m => m.ElementType).Returns(query_Blogs.ElementType);
+            mock_Blogs.As<IQueryable<Blog>>().Setup(m => m.GetEnumerator()).Returns(() => query_Blogs.GetEnumerator());
 
-            mock_context.Setup(c => c.Messages).Returns(mock_messages.Object);
-            mock_messages.Setup(u => u.Add(It.IsAny<Message>())).Callback((Message t) => messages.Add(t));
+            mock_context.Setup(c => c.Posts).Returns(mock_Blogs.Object);
+            mock_Blogs.Setup(u => u.Add(It.IsAny<Blog>())).Callback((Blog t) => Blogs.Add(t));
         }
 
         [TestMethod]
         public void RepoEnsureCanCreateAnInstance()
         {
-            MyPodRepository repo = new MyPodRepository();
+            MyPodRepo repo = new MyPodRepo();
             Assert.IsNotNull(repo);
         }
 
@@ -98,7 +98,7 @@ namespace MyPod.Tests.DAL
         public void RepoEnsureCanSubscribeToPodcasts()
         {
             ConnectToDatastore();
-            Repo.AddPodcastToUser("trentS", "thejoeroganexperience");
+            //Repo.AddPodcastToUser("trentS", "thejoeroganexperience");
 
             int expected_podcasts = 1;
             //int actual_podcasts = Repo.GetPodcasts().Count;

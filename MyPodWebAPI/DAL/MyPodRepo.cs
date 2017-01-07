@@ -41,7 +41,7 @@ namespace MyPodWebAPI.DAL
 
         public List<Podcast> GetAllPodcastsForUser(string username)
         {
-            return Context.Podcasts.Where(p => p.Subscriber.UserName == username).ToList();
+            return Context.Users.Where(u => u.UserName == username).FirstOrDefault().Subscriptions;
         }
 
         public Podcast GetPodcastById(int id)

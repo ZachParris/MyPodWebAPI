@@ -13,8 +13,8 @@ namespace MyPodWebAPI.Models
         public int PodcastId { get; set; }
         public string Title { get; set; }
         public string Author { get; set; }
+        public string FeedUrl { get; set; }
         public virtual List<Episode> Episodes { get; set; }
-        [JsonIgnoreAttribute]
-        public virtual CustomUser Subscriber { get; set; }
+        public virtual List<CustomUser> Subscribers { get; set; }
     }
 }
