@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using MyPodWebAPI.Providers;
+using System.Web.Services.Description;
 
 [assembly: OwinStartup(typeof(MyPodWebAPI.Startup))]
 namespace MyPodWebAPI
@@ -23,6 +24,7 @@ namespace MyPodWebAPI
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             app.UseWebApi(config);
         }
+
 
         public void ConfigureOAuth(IAppBuilder app)
         {

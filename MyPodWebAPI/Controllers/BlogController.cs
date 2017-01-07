@@ -47,28 +47,17 @@ namespace MyPodWebAPI.Controllers
 
         [Authorize]
         // POST api/<controller>
-        public Dictionary<string, bool> Post([FromBody]BlogViewModel value)
+        public Blog Post([FromBody]BlogViewModel value)
         {
-            Dictionary<string, bool> post = new Dictionary<string, bool>();
-
-            
-                string username = GetCurrentUser();
-
-                if (username != null)
-                {
-                    Blog new_post = new Blog
-                    {
-                        Post = value.BlogPost
-                    };
-                    repo.AddBlogPost(username, new_post);
-                    post.Add("successful", true);
-                }else
-                {
-                    post.Add("successful", false);
-                }
-           
-            return post;
+            string username = GetCurrentUser();
+            Blog new_post = new Blog
+            {
+                Post = value.BlogPost
+            };
+            repo.AddBlogPost(username, new_post);
+            return new_post;
         }
+        
 
         // PUT api/<controller>/5
         public void Put(int id, [FromBody]string value)

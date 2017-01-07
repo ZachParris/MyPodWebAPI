@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -13,5 +14,7 @@ namespace MyPodWebAPI.Models
         public string Title { get; set; }
         public string Author { get; set; }
         public virtual List<Episode> Episodes { get; set; }
+        [JsonIgnoreAttribute]
+        public virtual CustomUser Subscriber { get; set; }
     }
 }

@@ -154,6 +154,10 @@
     <Compile Include="Migrations\201701060018405_ChuckPls.Designer.cs">
       <DependentUpon>201701060018405_ChuckPls.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701062302012_PodcastSubscriber.cs" />
+    <Compile Include="Migrations\201701062302012_PodcastSubscriber.Designer.cs">
+      <DependentUpon>201701062302012_PodcastSubscriber.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Blog.cs" />
     <Compile Include="Models\CustomUser.cs" />
@@ -183,6 +187,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701060018405_ChuckPls.resx">
       <DependentUpon>201701060018405_ChuckPls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701062302012_PodcastSubscriber.resx">
+      <DependentUpon>201701062302012_PodcastSubscriber.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

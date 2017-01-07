@@ -23,6 +23,6 @@ Z:\TechMarkTool On My Mac\workspace\nss-capstones\mypod-webApi\MyPodFrontEnd\bin
 Z:\TechMarkTool On My Mac\workspace\nss-capstones\mypod-webApi\MyPodFrontEnd\bin\System.Net.Http.Formatting.xml
 Z:\TechMarkTool On My Mac\workspace\nss-capstones\mypod-webApi\MyPodFrontEnd\bin\System.Web.Http.xml
 Z:\TechMarkTool On My Mac\workspace\nss-capstones\mypod-webApi\MyPodFrontEnd\bin\System.Web.Http.WebHost.xml
+Z:\TechMarkTool On My Mac\workspace\nss-capstones\mypod-webApi\MyPodFrontEnd\obj\Debug\MyPodFrontEnd.csprojResolveAssemblyReference.cache
 Z:\TechMarkTool On My Mac\workspace\nss-capstones\mypod-webApi\MyPodFrontEnd\obj\Debug\MyPodFrontEnd.dll
 Z:\TechMarkTool On My Mac\workspace\nss-capstones\mypod-webApi\MyPodFrontEnd\obj\Debug\MyPodFrontEnd.pdb
-Z:\TechMarkTool On My Mac\workspace\nss-capstones\mypod-webApi\MyPodFrontEnd\obj\Debug\MyPodFrontEnd.csprojResolveAssemblyReference.cache

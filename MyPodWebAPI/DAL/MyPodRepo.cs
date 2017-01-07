@@ -39,6 +39,16 @@ namespace MyPodWebAPI.DAL
             return result;
         }
 
+        public List<Podcast> GetAllPodcastsForUser(string username)
+        {
+            return Context.Podcasts.Where(p => p.Subscriber.UserName == username).ToList();
+        }
+
+        public Podcast GetPodcastById(int id)
+        {
+            return Context.Podcasts.SingleOrDefault(p => p.PodcastId == id);
+        }
+
         public List<Blog> GetAllPostsForUser(string user)
         {
             return Context.Posts.Where(p => p.BlogAuthor.UserName == user).ToList();
@@ -62,18 +72,19 @@ namespace MyPodWebAPI.DAL
             return user;
         }
 
-        public object GetPodcasts()
+        public object GetPodcasts(string username)
         {
+            CustomUser user = Context.Users.SingleOrDefault(u => u.UserName == username);
             return Context.Users.Select(u => u.Id);
         }
 
-        public void AddPodcast(Podcast new_podcast)
+        public void SubscribeToPodcast(Podcast new_podcast)
         {
             Context.Podcasts.Add(new_podcast);
             Context.SaveChanges();
         }
 
-        public bool AddPodcastChannelToUser(string userId, string podcastId)
+        public bool AddPodcastChannelToUserSubscriptions(string userId, string podcastId)
         {
             Podcast found_podcast = Context.Podcasts.FirstOrDefault(p => p.Title == podcastId);
             CustomUser found_user = Context.Users.FirstOrDefault(u => u.Id == userId);
@@ -89,7 +100,7 @@ namespace MyPodWebAPI.DAL
             }
         }
 
-        public List<Podcast> ShowUsersPodcasts(string userId)
+        public List<Podcast> GetUsersPodcasts(string userId)
         {
             CustomUser user = Context.Users.SingleOrDefault(p => p.Id == userId);
             if (user.Subscriptions.Count > 0)

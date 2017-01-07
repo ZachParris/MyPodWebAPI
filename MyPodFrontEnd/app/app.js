@@ -26,6 +26,11 @@ app.config(function ($routeProvider, $locationProvider) {
 });
 
 app.config(function ($httpProvider) {
+    $httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+});
+
+app.config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptorService');
 });
 
