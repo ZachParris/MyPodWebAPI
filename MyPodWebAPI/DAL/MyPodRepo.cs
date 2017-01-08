@@ -104,11 +104,17 @@ namespace MyPodWebAPI.DAL
         {
 
             Podcast found_podcast = Context.Podcasts.FirstOrDefault(p => p.Title == podcast.Title);
-            //if found podcast = null thn add podcast to DB (context.podcast.add(podcast)) 
             CustomUser found_user = Context.Users.FirstOrDefault(u => u.Id == userId);
             
             if (found_podcast != null && found_user != null)
             {
+                found_user.Subscriptions.Add(found_podcast);
+                Context.SaveChanges();
+                return true;
+            }
+            else if (found_podcast == null && found_user != null)
+            {
+                Context.Podcasts.Add(found_podcast);
                 found_user.Subscriptions.Add(found_podcast);
                 Context.SaveChanges();
                 return true;

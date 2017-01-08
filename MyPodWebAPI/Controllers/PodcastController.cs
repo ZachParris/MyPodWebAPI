@@ -10,11 +10,11 @@ using System.Web.Http;
 
 namespace MyPodWebAPI.Controllers
 {
-    public class SearchController : ApiController
+    public class PodcastController : ApiController
     {
         private MyPodRepo repo = null;
 
-        public SearchController()
+        public PodcastController()
         {
             repo = new MyPodRepo();
         }

@@ -15,7 +15,7 @@ app.service("searchService", function ($http) {
             image: channel.artworkUrl600
         }
         console.log(channel)
-        return $http.post("http://localhost:50162/api/Search", channelObj)
+        return $http.post("http://localhost:50162/api/Podcast", channelObj)
     }
     return {
         addSubscription: addSubscription,

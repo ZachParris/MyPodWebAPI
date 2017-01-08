@@ -48,11 +48,4 @@ app.controller("searchController", function (searchService, $location) {
             $location.path("/podcasts");
         })
     }
-
-    vm.unfollowPodcast = function (url) {
-        searchService.subscription = function () {
-
-        }
-    }
-
-})
+})  
