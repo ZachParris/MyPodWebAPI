@@ -4,11 +4,15 @@
         <h2>yourpods.</h2>
         <ul class="list-group">
             <li class="list-group-item" ng-repeat="result in ctrl.subscriptionList">
-                <img src="{{result.image}}" />
-                <strong>{{result.title}}</strong>
-                <h4>{{result.author}}</h4>
+                <div class="container-fluid">
+                    <img class="col-xs-4" src={{result.imageUrl}} style="max-width: 75px; min-height: 75px; min-width: 110px;" />
+                    
+                    <h5 class="col-xs-8">{{result.title}}</h5>
+                    
+                </div>
+               
                 <a ng-click="ctrl.unfollowPodcast()" class="btn btn-default">UnFollow</a>
-                <a ng-click="ctrl.getPodcastFeed(result.feedUrl)" class="btn btn-default">Episodes</a>
+                <a ng-click="ctrl.getEpisodes(result.feedUrl)" class="btn btn-default">Episodes</a>
             </li>
         </ul>
     </div><br />
