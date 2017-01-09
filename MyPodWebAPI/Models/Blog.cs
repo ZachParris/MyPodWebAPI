@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace MyPodWebAPI.Models
         [Key]
         public int PostId { get; set; }
         public string Post { get; set; }
+        [JsonIgnoreAttribute]
         public virtual CustomUser BlogAuthor { get; set; }
     }
 }

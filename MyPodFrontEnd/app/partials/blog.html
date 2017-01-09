@@ -1,24 +1,21 @@
-﻿<section ng-controller="blogController as blog">
+﻿<section ng-init="getAllBlogPosts()">
     <div class="col-md-3" style="border:1px solid lightgrey;">
         <form>
             <div class="form-group">
                 <h2>blog.</h2>
-                <textarea class="blog-control" id="exampleTextarea" rows="3" ng-model="blog.blogInput"></textarea>
+                <textarea class="blog-control" style="width:280px; height:150px;" id="textarea" rows="4" ng-model="newPost.BlogPost"></textarea>
             </div>
-            <button type="submit" class="btn btn-default form-control" ng-click="blog.addNewPost()">Submit</button>
+            <button type="submit" class="btn btn-default form-control" ng-click="addNewPost(newPost)">Submit</button>
         </form>
     </div>
 
-    <div class="container col-sm-8 col-sm-offset-1" ng-hide="blog.blogPosts.length == 0">
+    <div class="container col-sm-8 col-sm-offset-1" ng-hide="blogPosts.length == 0">
         <h2>posts.</h2>
         <div class="panel panel-default">
             <ol class="list-group">
-                <li class="list-group-item" ng-repeat="blog in blog.blogPosts">
-                    <p>
-                        {{blog.Post}}
-                    </p>
-                    <button type="button" class="btn btn-default form-control" ng-click="blog.removePost()">Remove</button>
-
+                <li class="list-group-item" ng-repeat="blog in blogPosts">
+                    <p>{{blog.post}}</p>
+                    <a ng-click="removePost()" class="btn btn-default">Remove</a>
                 </li>
             </ol>
         </div>

@@ -1,6 +1,6 @@
 ﻿"use strict";
 
-app.controller("searchController", function (searchService) {
+app.controller("searchController", function (searchService, $location) {
     var vm = this;
     const parser = new DOMParser();
     vm.searchResults = [];
@@ -36,16 +36,12 @@ app.controller("searchController", function (searchService) {
         })
     }
 
-    vm.followPodcastChannel = function (url) {
-        searchService.subscription = function (userChoice) {
-            vm.subscriptions = userChoice.response.data;
-        }
+    vm.followPodcastChannel = function (channel) {
+        searchService.addSubscription(channel).then(function () {
+            vm.subscriptions.push(channel);
+            $location.path("/podcasts");
+            console.log(channel);
+        })
     }
 
-    vm.unfollowPodcast = function (url) {
-        searchService.subscription = function () {
-
-        }
-    }
-
-})
+})  

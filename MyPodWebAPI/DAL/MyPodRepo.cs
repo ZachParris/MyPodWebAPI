@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Http;
 
 namespace MyPodWebAPI.DAL
 {
@@ -38,6 +39,26 @@ namespace MyPodWebAPI.DAL
             return result;
         }
 
+        public CustomUser GetAppUser(string user_id)
+        {
+            return Context.Users.SingleOrDefault(u => u.Id == user_id);
+        }
+
+        public List<Podcast> GetAllPodcastsForUser(string username)
+        {
+            CustomUser found_user = Context.Users.FirstOrDefault(u => u.UserName == username);
+            List<Podcast> return_podcast = found_user.Subscriptions;
+
+            return return_podcast; 
+        }
+
+        public Podcast GetPodcastById(int id)
+        {
+            return Context.Podcasts.SingleOrDefault(p => p.PodcastId == id);
+        }
+
+
+      
         public void Dispose()
         {
             Context.Dispose();
@@ -51,20 +72,21 @@ namespace MyPodWebAPI.DAL
             return user;
         }
 
-        public object GetPodcasts()
+        public object GetPodcasts(string username)
         {
+            CustomUser user = Context.Users.SingleOrDefault(u => u.UserName == username);
             return Context.Users.Select(u => u.Id);
         }
 
-        public void AddPodcast(Podcast new_podcast)
+        public void SubscribeToPodcast(Podcast new_podcast)
         {
             Context.Podcasts.Add(new_podcast);
             Context.SaveChanges();
         }
 
-        public bool AddPodcastChannelToUser(string userId, string podcastId)
+        public bool AddPodcastChannelToUserSubscriptions(string userId, string podcast)
         {
-            Podcast found_podcast = Context.Podcasts.FirstOrDefault(p => p.Title == podcastId);
+            Podcast found_podcast = Context.Podcasts.FirstOrDefault(p => p.Title == podcast);
             CustomUser found_user = Context.Users.FirstOrDefault(u => u.Id == userId);
             if (found_podcast != null && found_user != null)
             {
@@ -78,7 +100,32 @@ namespace MyPodWebAPI.DAL
             }
         }
 
-        public List<Podcast> ShowUsersPodcasts(string userId)
+        public bool AddPodcastChannelToUserSubscriptions(string userId, Podcast podcast)
+        {
+
+            Podcast found_podcast = Context.Podcasts.FirstOrDefault(p => p.FeedUrl == podcast.FeedUrl);
+            CustomUser found_user = Context.Users.FirstOrDefault(u => u.UserName == userId);
+            
+            if (found_podcast != null && found_user != null)
+            {
+                found_user.Subscriptions.Add(podcast);
+                Context.SaveChanges();
+                return true;
+            }
+            else if (found_podcast == null && found_user != null)
+            {
+                Context.Podcasts.Add(podcast);
+                found_user.Subscriptions.Add(podcast);
+                Context.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public List<Podcast> GetUsersPodcasts(string userId)
         {
             CustomUser user = Context.Users.SingleOrDefault(p => p.Id == userId);
             if (user.Subscriptions.Count > 0)
@@ -89,6 +136,12 @@ namespace MyPodWebAPI.DAL
             {
                 return null;
             }
+        }
+
+
+        public List<Blog> GetAllPostsForUser(string user)
+        {
+            return Context.Posts.Where(p => p.BlogAuthor.UserName == user).ToList();
         }
 
         public void AddBlogPost(string user, Blog post)
@@ -108,15 +161,17 @@ namespace MyPodWebAPI.DAL
             return found_post;
         }
 
-        public List<Blog> GetBlogPosts()
+        public List<Blog> GetBlogPosts(string username)
         {
-            int i = 0;
-            return Context.Posts.ToList();
+            CustomUser user = Context.Users.SingleOrDefault(u => u.UserName == username);
+            return user.Posts;
         }
 
-        public CustomUser GetAppUser(string user_id)
+      
+
+        public Blog GetBlogById(int id)
         {
-            return Context.Users.SingleOrDefault(u => u.Id == user_id);
+            return Context.Posts.SingleOrDefault(p => p.PostId == id);
         }
 
     }

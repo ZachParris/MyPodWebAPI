@@ -2,7 +2,7 @@
 
 app.config(function ($routeProvider, $locationProvider) {
 
-    $routeProvider.when("/home", {
+    $routeProvider.when("/", {
         controller: "indexController",
         templateUrl: "app/partials/home.html"
     }).when("/login", {
@@ -18,11 +18,20 @@ app.config(function ($routeProvider, $locationProvider) {
         controller: "blogController",
         templateUrl: "app/partials/blog.html"
     }).when("/podcasts", {
-        controller: "searchController",
+        controller: "podcastController",
         templateUrl: "app/partials/podcasts.html"
-    }).otherwise({ redirectTo: "/home" });
+    }).otherwise({ redirectTo: "/" });
 
     $locationProvider.html5Mode(true);
+});
+
+app.config(function ($httpProvider) {
+    $httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+});
+
+app.config(function ($httpProvider) {
+    $httpProvider.interceptors.push('authInterceptorService');
 });
 
 app.run(['authService', function (authService) {

@@ -143,11 +143,20 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\PodcastController.cs" />
     <Compile Include="DAL\MyPodContext.cs" />
     <Compile Include="DAL\MyPodRepo.cs" />
-    <Compile Include="Migrations\201612310018070_InitialCreate.cs" />
-    <Compile Include="Migrations\201612310018070_InitialCreate.Designer.cs">
-      <DependentUpon>201612310018070_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201701070304478_initialCreate.cs" />
+    <Compile Include="Migrations\201701070304478_initialCreate.Designer.cs">
+      <DependentUpon>201701070304478_initialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701071722095_ImageUrl.cs" />
+    <Compile Include="Migrations\201701071722095_ImageUrl.Designer.cs">
+      <DependentUpon>201701071722095_ImageUrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701082044331_getSubscriptions.cs" />
+    <Compile Include="Migrations\201701082044331_getSubscriptions.Designer.cs">
+      <DependentUpon>201701082044331_getSubscriptions.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Blog.cs" />
@@ -173,8 +182,14 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201612310018070_InitialCreate.resx">
-      <DependentUpon>201612310018070_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201701070304478_initialCreate.resx">
+      <DependentUpon>201701070304478_initialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701071722095_ImageUrl.resx">
+      <DependentUpon>201701071722095_ImageUrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701082044331_getSubscriptions.resx">
+      <DependentUpon>201701082044331_getSubscriptions.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

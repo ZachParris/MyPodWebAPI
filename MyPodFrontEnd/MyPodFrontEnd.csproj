@@ -84,11 +84,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\controllers\blogController.js" />
+    <Content Include="app\controllers\podcastController.js" />
     <Content Include="app\controllers\searchController.js" />
     <Content Include="app\partials\blog.html" />
     <Content Include="app\partials\nowplaying.html" />
     <Content Include="app\partials\podcasts.html" />
     <Content Include="app\services\blogService.js" />
+    <Content Include="app\services\podcastService.js" />
     <Content Include="app\services\searchService.js" />
     <Content Include="content\styles\main.css" />
     <Content Include="packages.config" />
