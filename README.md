@@ -3,9 +3,9 @@
 ## A Podcast Player and Blogging App
 
 ##### Welcome to MyPod!
-<img src="https://github.com/ZachParris/MyPodWebAPI/blob/master/screenshots/MyPod-BE-Capstone.png" width="400">
+<img src="https://github.com/ZachParris/MyPodWebAPI/blob/master/screenshots/MyPod-BE-Capstone.png" width="900">
 
-<img src="https://github.com/ZachParris/MyPodWebAPI/blob/master/screenshots/MyPod-Search.png" width="400">
+<img src="https://github.com/ZachParris/MyPodWebAPI/blob/master/screenshots/MyPod-Search.png" width="800">
 
 
 ## Summary
