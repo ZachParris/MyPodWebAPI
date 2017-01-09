@@ -16,6 +16,7 @@ namespace MyPodWebAPI.Models
         public string ImageUrl { get; set; }
         public string FeedUrl { get; set; }
         public virtual List<Episode> Episodes { get; set; }
+        [JsonIgnoreAttribute]
         public virtual List<CustomUser> Subscribers { get; set; }
     }
 }

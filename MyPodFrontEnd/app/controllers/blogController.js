@@ -8,7 +8,7 @@ app.controller("blogController", ['$scope', '$location', 'authService', 'blogSer
     $scope.addNewPost = function (input) {
         console.log(input);
         blogService.addPost(input).then(function (response) {
-            $scope.blogPosts.push(response.data);
+            $scope.blogPosts.unshift(response.data);
             $scope.newPost = null;
         })
     }

@@ -7,6 +7,10 @@ using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Web.Http;
+using System.Security.Principal;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using System.Web;
 
 namespace MyPodWebAPI.Controllers
 {
@@ -20,10 +24,10 @@ namespace MyPodWebAPI.Controllers
         }
 
         [Authorize]
-        // GET: api/Search
-        public List<Podcast> Get()
+        // GET: api/Podcast
+        public IEnumerable<Podcast> Get()
         {
-            return repo.GetUsersPodcasts(GetCurrentUser());
+            return repo.GetAllPodcastsForUser(GetCurrentUser());
         }
 
         private string GetCurrentUser()
@@ -33,24 +37,24 @@ namespace MyPodWebAPI.Controllers
             return userName;
         }
 
-        // GET: api/Search/5
+        // GET: api/Podcast/5
         public Podcast Get(int id)
         {
-            if(repo.GetUsersPodcasts(GetCurrentUser()).Any(p => p.PodcastId == id))
+            if(repo.GetAllPodcastsForUser(GetCurrentUser()).Any(p => p.PodcastId == id))
             {
                 return repo.GetPodcastById(id);
             }
             return null;
         }
 
-        // POST: api/Search
+        // POST: api/Podcast
         public void Post([FromBody]dynamic value)
         {
             Podcast new_podcast = new Podcast();
             new_podcast.FeedUrl = value.feedUrl;
             new_podcast.Title = value.title;
             new_podcast.Author = value.author;
-            new_podcast.ImageUrl = value.artWork1600;
+            new_podcast.ImageUrl = value.image;
             repo.AddPodcastChannelToUserSubscriptions(GetCurrentUser(), new_podcast);
         }
 

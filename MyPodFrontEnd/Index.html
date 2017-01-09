@@ -15,19 +15,19 @@
                 <a class="nav-link" href="/login">Login</a>
             </li>
             <li data-ng-hide="!authentication.isAuth" class="nav-item">
+                <a class="nav-link" href="/account">Home</a>
+            </li>
+            <li data-ng-hide="!authentication.isAuth" class="nav-item">
                 <a class="nav-link" href="/search">Search</a>
             </li>
             <li data-ng-hide="!authentication.isAuth" class="nav-item">
-                <a class="nav-link" href="/podcasts">Podcasts</a>
+                <a class="nav-link" href="/podcasts">YourPods</a>
             </li>
             <li data-ng-hide="!authentication.isAuth" class="nav-item">
                 <a class="nav-link" href="/blog">Blog</a>
             </li>
             <li data-ng-hide="authentication.isAuth" class="nav-item">
                 <a class="nav-link" href="/signup">Sign Up</a>
-            </li>
-            <li data-ng-hide="!authentication.isAuth" class="nav-item">
-                <a class="nav-link" href="/account">Account</a>
             </li>
             <li data-ng-hide="!authentication.isAuth" class="nav-item">
                 <a data-ng-click="logOut()" class="nav-link" href="">Logout</a>
@@ -37,7 +37,7 @@
 
     <div data-ng-view=""></div>
 
-    <section class="container-fluid" ng-controller="searchController as ctrl" ng-hide="!ctrl.nowPlaying">
+    <!--<section class="container-fluid" ng-controller="searchController as ctrl" ng-hide="!ctrl.nowPlaying">
         <div class="panel panel-default episodes" ng-model="getPodcastFeed">
             <p>{{episode.title}}</p>
             <audio controls>
@@ -46,7 +46,7 @@
                 Your browser does not support the audio element.
             </audio>
         </div>
-    </section>
+    </section>-->
 
     <!--Angular Stuff-->
     <script src="scripts/angular.js"></script>
@@ -59,11 +59,13 @@
     <script src="app/services/authService.js"></script>
     <script src="app/services/searchService.js"></script>
     <script src="app/services/blogService.js"></script>
+    <script src="app/services/podcastService.js"></script>
 
     <script src="app/controllers/signupController.js"></script>
     <script src="app/controllers/loginController.js"></script>
     <script src="app/controllers/indexController.js"></script>
     <script src="app/controllers/searchController.js"></script>
     <script src="app/controllers/blogController.js"></script>
+    <script src="app/controllers/podcastController.js"></script>
 </body>
 </html>

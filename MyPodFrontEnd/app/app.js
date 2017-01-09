@@ -18,7 +18,7 @@ app.config(function ($routeProvider, $locationProvider) {
         controller: "blogController",
         templateUrl: "app/partials/blog.html"
     }).when("/podcasts", {
-        controller: "searchController",
+        controller: "podcastController",
         templateUrl: "app/partials/podcasts.html"
     }).otherwise({ redirectTo: "/" });
 

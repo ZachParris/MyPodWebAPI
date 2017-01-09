@@ -154,6 +154,10 @@
     <Compile Include="Migrations\201701071722095_ImageUrl.Designer.cs">
       <DependentUpon>201701071722095_ImageUrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701082044331_getSubscriptions.cs" />
+    <Compile Include="Migrations\201701082044331_getSubscriptions.Designer.cs">
+      <DependentUpon>201701082044331_getSubscriptions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Blog.cs" />
     <Compile Include="Models\CustomUser.cs" />
@@ -183,6 +187,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701071722095_ImageUrl.resx">
       <DependentUpon>201701071722095_ImageUrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701082044331_getSubscriptions.resx">
+      <DependentUpon>201701082044331_getSubscriptions.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -14,7 +14,6 @@ app.factory('authInterceptorService', ['$q', '$location', 'localStorageService',
             config.headers.Authorization = 'Bearer ' + authData.token;
         }
 
-        console.log(authData);
         return config;
     };
 

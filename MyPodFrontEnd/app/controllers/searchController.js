@@ -36,16 +36,12 @@ app.controller("searchController", function (searchService, $location) {
         })
     }
 
-    vm.nowPlaying = function (url) {
-        searchService.searchResult(url).then(function (response) {
-            getPodcastFeed();
-            chosenEpisode = response.data
+    vm.followPodcastChannel = function (channel) {
+        searchService.addSubscription(channel).then(function () {
+            vm.subscriptions.push(channel);
+            $location.path("/podcasts");
+            console.log(channel);
         })
     }
 
-    vm.followPodcastChannel = function (channel) {
-        searchService.addSubscription(channel).then(function () {
-            $location.path("/podcasts");
-        })
-    }
 })  

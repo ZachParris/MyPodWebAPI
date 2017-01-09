@@ -2,6 +2,10 @@
     padding-bottom: 20px;
 }
 
+.img-fluid .img-responsive {
+    margin: 0 auto;
+}
+
 /* Set padding to keep content from hitting the edges */
 .lead {
     text-align:center;
@@ -11,6 +15,8 @@
 .jumbotron {
     margin-top: 0px;
     background-color:white;
+    text-align: center;
+    margin-bottom: 0;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -22,8 +28,7 @@
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
-select,
-textarea {
+select {
     max-width: 280px;
 }
 
